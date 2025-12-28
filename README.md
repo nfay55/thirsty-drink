@@ -2,7 +2,7 @@
 
 A beautiful cocktail recipe finder app built with Next.js and TypeScript. Search for cocktails by name and view detailed recipes with ingredient measurements displayed in an interactive pie chart.
 
-### Deployed URL: [https://thirsty-drink.vercel.app]
+### Deployed URL: https://thirsty-drink.vercel.app
 
 ![Next.js](https://img.shields.io/badge/Next.js-16.1-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
