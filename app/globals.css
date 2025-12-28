@@ -1,0 +1,484 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #ff6b35;
+  --color-primary-dark: #e55a2b;
+  --color-secondary: #004e89;
+  --color-accent: #ffc857;
+  --color-background: #fefae0;
+  --color-surface: #ffffff;
+  --color-text: #1a1a2e;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-success: #10b981;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-mono: var(--font-mono), monospace;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: linear-gradient(135deg, #fefae0 0%, #faedcd 50%, #e9edc9 100%);
+  color: var(--color-text);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* App Container */
+.app-container {
+  max-width: 650px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+/* Header */
+.app-header {
+  padding: 40px 20px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #ff8c5a 100%);
+  color: white;
+}
+
+.app-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.title-icon {
+  font-size: 36px;
+  animation: shake 2s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.app-subtitle {
+  margin-top: 8px;
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* Search Bar */
+.search-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 16px 20px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-icon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  font-family: inherit;
+  color: var(--color-text);
+  background: transparent;
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.clear-button {
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+}
+
+.clear-button:hover {
+  color: var(--color-text);
+  background: var(--color-border);
+}
+
+/* Main Content */
+.main-content {
+  min-height: calc(100vh - 180px);
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: var(--color-text-muted);
+  gap: 16px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.empty-state h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+/* Drink List */
+.drink-list {
+  padding: 0;
+}
+
+/* Drink List Item */
+/* Row height: 60px */
+.drink-list-item {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.15s ease;
+  padding-right: 16px;
+}
+
+.drink-list-item:hover {
+  background: #fafafa;
+}
+
+.drink-list-item:active {
+  background: #f5f5f5;
+}
+
+/* Image view: Size 40px, Circle, Margins: Left 10, Right 15, Top 10, Bottom 10 */
+.drink-image-container {
+  width: 40px;
+  height: 40px;
+  margin: 10px 15px 10px 10px; /* top right bottom left */
+  flex-shrink: 0;
+}
+
+.drink-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Circle */
+  object-fit: cover;
+}
+
+/* Name: Font size 17, vertically centered with image */
+.drink-name {
+  flex: 1;
+  font-size: 17px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chevron-icon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+/* Detail Page */
+.detail-container {
+  max-width: 650px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Header: "< Thirsty" on left, drink name on right */
+.detail-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #007AFF;
+  font-size: 17px;
+}
+
+.back-chevron {
+  font-size: 24px;
+  margin-right: 2px;
+  line-height: 1;
+}
+
+.back-text {
+  font-weight: 400;
+}
+
+.header-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.detail-content {
+  padding-bottom: 20px;
+}
+
+/* 1. Image View: Top margin 30, Horizontally centered, Circular */
+.drink-image-section {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.drink-detail-image-container {
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.drink-detail-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 2. Name: Font size 20, Bold, Top margin 20, Horizontally centered */
+.drink-detail-name {
+  margin: 20px 20px 0 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+}
+
+/* 3. Ingredients label: Left 20, Top 30, Bottom 20, Font 17, Bold */
+.ingredients-label {
+  margin: 30px 20px 20px 20px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* Container for legend and pie chart side by side */
+.ingredients-chart-container {
+  display: flex;
+  align-items: flex-start;
+  margin: 0 20px 20px 20px;
+  gap: 20px;
+}
+
+/* 4. Legend: Font 17, wrap to multiple lines */
+/* Color square: 20x20, corner radius 3 */
+.ingredient-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Color square: 20x20, corner radius 3 */
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* Legend font size: 17 */
+.legend-text {
+  font-size: 17px;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.legend-measure {
+  color: var(--color-text-muted);
+}
+
+/* 5. Pie chart: Size 120 */
+.pie-chart-container {
+  display: flex;
+  justify-content: center;
+}
+
+.pie-chart {
+  border-radius: 50%;
+}
+
+.pie-chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  text-align: center;
+  padding: 16px;
+}
+
+.pie-chart-wrapper {
+  flex-shrink: 0;
+}
+
+/* 6. Instructions: Left/Right 20, Top 30, Bottom 20, Font 17 */
+.instructions-text {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin: 30px 20px 20px 20px;
+}
+
+/* Not Found Page */
+.not-found-container {
+  max-width: 650px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found-content {
+  text-align: center;
+  padding: 40px;
+}
+
+.not-found-icon {
+  font-size: 80px;
+  margin-bottom: 24px;
+}
+
+.not-found-content h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.not-found-content p {
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+}
+
+.back-home-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.back-home-button:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .app-container,
+  .detail-container,
+  .not-found-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: var(--radius-lg);
+    min-height: calc(100vh - 40px);
+  }
+}
