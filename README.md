@@ -31,7 +31,7 @@ A beautiful cocktail recipe finder app built with Next.js and TypeScript. Search
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/thirsty-drink.git
+git clone https://github.com/nfay55/thirsty-drink.git
 cd thirsty-drink
 ```
 
@@ -204,7 +204,3 @@ No API key required!
 ## 📝 License
 
 MIT License - feel free to use this project for learning or building upon.
-
----
-
-Built with ❤️ for the Spiral Coding Challenge 2025/2026
